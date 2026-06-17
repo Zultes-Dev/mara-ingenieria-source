@@ -88,9 +88,9 @@ export function Hero() {
           </div>
         </div>
 
-        {/* ── Right: Image mosaic with left-edge gradient overlap ── */}
-        <div className="relative overflow-hidden lg:block">
-          {/* 2x2 mosaic */}
+        {/* ── Right: Image mosaic ── */}
+        <div className="relative min-h-[320px] sm:min-h-[480px] lg:min-h-0 overflow-hidden">
+          {/* 2x2 grid */}
           <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-[2px]">
             {hero.images.map((img, i) => (
               <motion.div
@@ -104,28 +104,29 @@ export function Hero() {
                   src={img.src}
                   alt={img.alt}
                   fill
-                  sizes="30vw"
-                  className="object-cover opacity-50 grayscale-[10%]"
+                  sizes="(max-width:1024px) 100vw, 30vw"
+                  className="object-cover opacity-55 lg:opacity-50 grayscale-[10%]"
                 />
               </motion.div>
             ))}
           </div>
-          {/* Diffused dark gradient — left edge blends with text */}
-          <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-l from-transparent via-brand-ink/20 to-brand-ink lg:via-brand-ink/30" />
-          {/* Top/bottom fade for polish */}
-          <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-brand-ink/10 to-transparent" />
-          <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-brand-ink/10 to-transparent" />
+
+          {/* Dark diffused gradient: center → right edge */}
+          <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-[#0a0e17] via-brand-ink/60 via-30% to-transparent" />
+          {/* Top/bottom gentle fade */}
+          <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-brand-ink/15 to-transparent" />
+          <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-brand-ink/30 via-transparent to-transparent" />
 
           {/* Floating card */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
-            className="absolute bottom-6 left-4 md:bottom-9 md:left-9 z-20 bg-brand-ink/85 backdrop-blur-xl border border-white/10 rounded-card p-4 md:p-5 max-w-[180px] md:max-w-[200px]"
+            className="absolute bottom-5 left-1/2 -translate-x-1/2 sm:left-6 sm:translate-x-0 md:bottom-9 md:left-9 z-20 bg-brand-ink/85 backdrop-blur-xl border border-white/10 rounded-card p-3 sm:p-4 md:p-5 w-[90%] sm:w-auto max-w-[200px] text-center sm:text-left"
           >
-            <p className="font-semi text-[10px] tracking-[2.5px] uppercase text-brand-sky mb-2">Enfoque</p>
-            <p className="font-display font-black text-[22px] md:text-[26px] leading-none">Calidad<br/>primero.</p>
-            <p className="text-[12px] text-brand-slate mt-1">Sin atajos técnicos</p>
+            <p className="font-semi text-[10px] tracking-[2.5px] uppercase text-brand-sky mb-1.5">Enfoque</p>
+            <p className="font-display font-black text-[20px] sm:text-[22px] md:text-[26px] leading-none">Calidad<br className="hidden sm:block"/>primero.</p>
+            <p className="text-[11px] sm:text-[12px] text-brand-slate mt-1">Sin atajos técnicos</p>
           </motion.div>
         </div>
       </div>
