@@ -1,0 +1,22 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_VERSION = "10"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Redirect www → non-www (DNS debe apuntar ambos al mismo sitio)
+[[redirects]]
+  from = "https://www.maraingenieria.com/*"
+  to = "https://maraingenieria.com/:splat"
+  status = 301
+
+# Cache estático — assets inmutables
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

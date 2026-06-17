@@ -1,0 +1,124 @@
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CSS CUSTOM PROPERTIES
+   Se usan en componentes que no pasan por Tailwind
+   (Leaflet, third-party libs, etc.)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+:root {
+  --color-sky:      #00AEEF;
+  --color-navy:     #1E2647;
+  --color-ink:      #0D1117;
+  --color-slate:    #8A95A8;
+  --color-surface1: #13192a;
+  --color-surface2: #0a0e17;
+  --border-subtle:  rgba(255,255,255,0.06);
+  --border-sky:     rgba(0,174,239,0.18);
+  --radius-card:    12px;
+  --radius-card-lg: 20px;
+  --max-width:      1160px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BASE RESET EXTENSIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Previene el flash de scroll en Safari */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    @apply bg-brand-ink text-white font-body antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Scrollbar personalizado */
+  ::-webkit-scrollbar       { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--color-ink); }
+  ::-webkit-scrollbar-thumb { background: var(--color-sky); border-radius: 4px; }
+
+  /* Focus visible accesible — importante para licitaciones públicas */
+  :focus-visible {
+    outline: 2px solid var(--color-sky);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Selección de texto */
+  ::selection {
+    background: rgba(0,174,239,0.25);
+    color: white;
+  }
+
+  /* Imágenes responsive por defecto */
+  img, video {
+    @apply block max-w-full;
+  }
+
+  /* Links sin estilo por defecto */
+  a {
+    @apply no-underline;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   COMPONENT LAYER — clases compuestas reutilizables
+   Solo para patrones que se repiten 3+ veces
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@layer components {
+  /* Contenedor centrado del sitio */
+  .site-container {
+    @apply max-w-site mx-auto px-[5%];
+  }
+
+  /* Texto display con stroke effect */
+  .text-stroke {
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.35);
+    color: transparent;
+  }
+
+  /* Línea decorativa de sección */
+  .section-rule {
+    @apply w-12 h-[3px] bg-brand-sky;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LEAFLET OVERRIDES
+   Necesario porque Leaflet inyecta estilos inline
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.leaflet-control-zoom {
+  border: 1px solid var(--border-sky) !important;
+  background: rgba(13,17,23,0.9) !important;
+}
+.leaflet-control-zoom a {
+  background: rgba(13,17,23,0.9) !important;
+  color: var(--color-sky) !important;
+  border-bottom: 1px solid var(--border-sky) !important;
+  font-size: 16px !important;
+  line-height: 30px !important;
+}
+.leaflet-control-zoom a:hover {
+  background: rgba(0,174,239,0.1) !important;
+}
+.leaflet-popup-content-wrapper {
+  background: var(--color-surface1) !important;
+  border: 1px solid var(--border-sky) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+  color: white !important;
+}
+.leaflet-popup-tip {
+  background: var(--color-surface1) !important;
+}
+.leaflet-popup-content {
+  margin: 14px 18px !important;
+}
+.leaflet-attribution-flag {
+  display: none !important;
+}
