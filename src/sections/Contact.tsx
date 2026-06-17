@@ -55,18 +55,22 @@ export function Contact() {
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
       setForm(prev => ({ ...prev, [field]: e.target.value }))
 
-  // In a real deploy: replace with your backend/formspree/resend endpoint
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setStatus('submitting')
     track.formSubmit(form.service)
 
     try {
-      // Example: POST to /api/contact (Next.js Route Handler)
-      const res = await fetch('/api/contact', {
+      const payload = {
+        _template: 'box',
+        _captcha: 'true',
+        _subject: `Nueva solicitud — ${form.name} — ${form.service || 'Sin servicio'}`,
+        ...form,
+      }
+      const res = await fetch('https://formsubmit.co/ajax/Maraingenieriasas@gmail.com', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(form),
+        body:    JSON.stringify(payload),
       })
       if (!res.ok) throw new Error('Server error')
       setStatus('success')
@@ -164,30 +168,31 @@ export function Contact() {
               )}
 
               <form onSubmit={handleSubmit} noValidate>
+                <input type="text" name="_honey" className="hidden" />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
                   <Field label="Nombre completo" id="name" required>
-                    <input id="name" type="text" required placeholder="Su nombre" value={form.name} onChange={set('name')} className={inputClass} />
+                    <input id="name" name="name" type="text" required placeholder="Su nombre" value={form.name} onChange={set('name')} className={inputClass} />
                   </Field>
                   <Field label="Teléfono" id="phone" required>
-                    <input id="phone" type="tel" required placeholder="+57 300 000 0000" value={form.phone} onChange={set('phone')} className={inputClass} />
+                    <input id="phone" name="phone" type="tel" required placeholder="+57 300 000 0000" value={form.phone} onChange={set('phone')} className={inputClass} />
                   </Field>
                 </div>
 
                 <div className="mb-4">
                   <Field label="Correo electrónico" id="email" required>
-                    <input id="email" type="email" required placeholder="su@correo.com" value={form.email} onChange={set('email')} className={inputClass} />
+                    <input id="email" name="email" type="email" required placeholder="su@correo.com" value={form.email} onChange={set('email')} className={inputClass} />
                   </Field>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
                   <Field label="Tipo de cliente" id="clientType">
-                    <select id="clientType" value={form.clientType} onChange={set('clientType')} className={inputClass}>
+                    <select id="clientType" name="clientType" value={form.clientType} onChange={set('clientType')} className={inputClass}>
                       <option value="">Seleccione...</option>
                       {contactForm.clientTypeOptions.map(opt => <option key={opt}>{opt}</option>)}
                     </select>
                   </Field>
                   <Field label="Servicio requerido" id="service">
-                    <select id="service" value={form.service} onChange={set('service')} className={inputClass}>
+                    <select id="service" name="service" value={form.service} onChange={set('service')} className={inputClass}>
                       <option value="">Seleccione un servicio</option>
                       {contactForm.serviceOptions.map(opt => <option key={opt}>{opt}</option>)}
                     </select>
@@ -197,7 +202,7 @@ export function Contact() {
                 <div className="mb-5">
                   <Field label="Describa su proyecto" id="message" required>
                     <textarea
-                      id="message" required rows={4}
+                      id="message" name="message" required rows={4}
                       placeholder="¿Qué necesita construir, remodelar o supervisar? Ubicación aproximada, etapa en la que está..."
                       value={form.message} onChange={set('message')}
                       className={cn(inputClass, 'resize-y min-h-[110px]')}
