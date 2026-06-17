@@ -103,10 +103,13 @@ export async function POST(req: NextRequest) {
       const resend = new Resend(process.env.RESEND_API_KEY)
       const serviceLabel = data.service || 'No especificado'
       const clientLabel  = data.clientType || 'No especificado'
+      const toEmail = process.env.CONTACT_EMAIL || 'Maraingenieriasas@gmail.com'
+      const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev'
+      const fromName = process.env.FROM_NAME || 'MARA Web'
 
       await resend.emails.send({
-        from:    'MARA Ingeniería <noreply@maraingenieria.com>',
-        to:      process.env.CONTACT_EMAIL!,
+        from:    `${fromName} <${fromEmail}>`,
+        to:      toEmail,
         subject: `Nueva solicitud — ${data.name} — ${serviceLabel}`,
         html: `
           <!DOCTYPE html>

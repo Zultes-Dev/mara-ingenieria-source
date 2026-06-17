@@ -70,7 +70,7 @@ export const hero = {
   statusText: 'Empresa activa · Recibiendo proyectos',
   headline:   ['Construimos', 'con', 'precisión'],
   description:
-    'Ingeniería civil, consultoría, interventoría y construcción con un equipo técnico joven, honesto y comprometido desde el primer plano hasta la entrega final.',
+    'Ingeniería civil, consultoría, interventoría y construcción con un equipo técnico honesto y comprometido desde el primer plano hasta la entrega final.',
   cta: {
     primary:   'Solicitar cotización',
     secondary: 'Ver servicios',

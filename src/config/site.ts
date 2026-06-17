@@ -7,7 +7,7 @@
 export const site = {
   name:        'MARA Ingeniería',
   tagline:     'Ingeniería Civil & Construcción en Colombia',
-  description: 'Empresa joven de ingeniería civil con base en Barrancabermeja, Santander. Consultoría, interventoría, obra civil y remodelaciones con rigor técnico y transparencia total.',
+  description: 'Empresa de ingeniería civil con base en Barrancabermeja, Santander. Consultoría, interventoría, obra civil y remodelaciones con rigor técnico y transparencia total.',
   url:         'https://maraingenieria.com',
   locale:      'es_CO',
 
