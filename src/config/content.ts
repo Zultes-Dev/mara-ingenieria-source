@@ -82,19 +82,19 @@ export const hero = {
   // Imágenes del mosaico — reemplazar con fotos propias cuando estén disponibles
   images: [
     {
-      src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80&fit=crop',
+      src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=75&fit=crop',
       alt: 'Construcción de estructura civil',
     },
     {
-      src: 'https://images.unsplash.com/photo-1590644365607-35e59f79f9a9?w=600&q=80&fit=crop',
-      alt: 'Ingeniería estructural',
+      src: 'https://images.unsplash.com/photo-1541888946425-d81bb5b8d3b8?w=800&q=75&fit=crop',
+      alt: 'Consultor de ingeniería civil',
     },
     {
-      src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80&fit=crop',
+      src: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=75&fit=crop',
       alt: 'Obra civil en ejecución',
     },
     {
-      src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&q=80&fit=crop',
+      src: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=75&fit=crop',
       alt: 'Consultoría técnica de campo',
     },
   ],

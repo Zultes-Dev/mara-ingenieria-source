@@ -1,7 +1,6 @@
 // components/layout/Footer.tsx
 'use client'
 
-import Image from 'next/image'
 import { Reveal } from '@components/ui/Reveal'
 import { site } from '@config/site'
 import { services } from '@config/content'
@@ -23,12 +22,11 @@ export function Footer() {
 
           <Reveal>
             <div>
-              <Image
+              <img
                 src="/assets/logo.png"
                 alt={site.name}
-                width={160}
-                height={63}
-                className="h-[52px] w-auto object-contain brightness-0 invert mb-5"
+                style={{ height: '52px', width: 'auto' }}
+                className="mb-5"
               />
               <p className="text-[14px] text-white/38 leading-[1.75] max-w-xs mb-6">
                 Empresa de ingeniería civil con base en Barrancabermeja, Santander. Comprometidos con la calidad técnica y la transparencia desde el primer proyecto.

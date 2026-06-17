@@ -2,7 +2,6 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import Image from 'next/image'
 import { useScrolled } from '@hooks/useScrolled'
 import { navLinks } from '@config/content'
 import { site } from '@config/site'
@@ -53,13 +52,10 @@ export function Navbar() {
             onClick={(e) => { e.preventDefault(); scrollTo('#hero') }}
             className="focus-visible:outline-brand-sky"
           >
-            <Image
+            <img
               src="/assets/logo.png"
               alt={site.name}
-              width={160}
-              height={63}
-              className="h-[46px] w-auto object-contain brightness-0 invert"
-              priority
+              style={{ height: '46px', width: 'auto' }}
             />
           </a>
 

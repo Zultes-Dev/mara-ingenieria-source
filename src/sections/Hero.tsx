@@ -31,6 +31,9 @@ export function Hero() {
         style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E\")" }}
         aria-hidden="true"
       />
+      {/* Gradient overlays for text readability */}
+      <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-br from-brand-navy/40 via-brand-ink to-brand-ink/95 lg:bg-none" />
+      <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-r from-brand-ink via-brand-ink/60 to-transparent lg:via-transparent" />
 
       <div ref={ref} className="relative z-10 flex-1 flex flex-col lg:grid lg:grid-cols-2">
 
