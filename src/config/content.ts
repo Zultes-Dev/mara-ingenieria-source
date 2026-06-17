@@ -86,7 +86,7 @@ export const hero = {
       alt: 'Construcción de estructura civil',
     },
     {
-      src: 'https://images.unsplash.com/photo-1541888946425-d81bb5b8d3b8?w=800&q=75&fit=crop',
+      src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=75&fit=crop',
       alt: 'Consultor de ingeniería civil',
     },
     {

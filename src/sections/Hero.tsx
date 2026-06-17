@@ -25,15 +25,31 @@ export function Hero() {
   return (
     <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-brand-ink">
 
-      {/* Noise texture */}
-      <div
-        className="absolute inset-0 z-0 pointer-events-none opacity-30"
-        style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E\")" }}
-        aria-hidden="true"
-      />
-      {/* Gradient overlays for text readability */}
-      <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-br from-brand-navy/40 via-brand-ink to-brand-ink/95 lg:bg-none" />
-      <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-r from-brand-ink via-brand-ink/60 to-transparent lg:via-transparent" />
+      {/* ── Fullscreen image mosaic ── */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-[2px]">
+          {hero.images.map((img, i) => (
+            <div key={i} className="overflow-hidden relative">
+              <Image
+                src={img.src}
+                alt=""
+                fill
+                sizes="50vw"
+                className="object-cover opacity-60 lg:opacity-70 scale-105"
+                priority={i < 2}
+              />
+            </div>
+          ))}
+        </div>
+        {/* Noise texture */}
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none opacity-20 mix-blend-overlay"
+          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E\")" }}
+          aria-hidden="true"
+        />
+        {/* Gradient overlay — diffused professional */}
+        <div className="absolute inset-0 z-[2] bg-gradient-to-br from-brand-ink/90 via-brand-ink/60 to-brand-ink/30" />
+      </div>
 
       <div ref={ref} className="relative z-10 flex-1 flex flex-col lg:grid lg:grid-cols-2">
 
@@ -41,7 +57,6 @@ export function Hero() {
         <div className="flex flex-col justify-center px-[5%] py-24 sm:py-32 lg:py-0">
           <div className="max-w-[560px] lg:ml-auto lg:pr-[60px]">
 
-            {/* Status */}
             <motion.div {...fadeUp(0)} initial="initial" animate={isInView ? 'animate' : 'initial'} className="flex items-center gap-2.5 mb-8">
               <span className="relative flex w-2.5 h-2.5">
                 <span className="absolute inset-0 rounded-full bg-[#22c55e] animate-ping opacity-40" />
@@ -52,7 +67,6 @@ export function Hero() {
               </span>
             </motion.div>
 
-            {/* Headline */}
             <motion.h1
               {...fadeUp(0.1)} initial="initial" animate={isInView ? 'animate' : 'initial'}
               className="font-display font-black text-display-xl uppercase leading-[0.9] tracking-[-3px] mb-6"
@@ -64,7 +78,6 @@ export function Hero() {
               ))}
             </motion.h1>
 
-            {/* Description */}
             <motion.p
               {...fadeUp(0.2)} initial="initial" animate={isInView ? 'animate' : 'initial'}
               className="text-[16px] text-white/55 leading-[1.75] max-w-[460px] mb-10 font-light"
@@ -72,7 +85,6 @@ export function Hero() {
               {hero.description}
             </motion.p>
 
-            {/* CTAs */}
             <motion.div
               {...fadeUp(0.3)} initial="initial" animate={isInView ? 'animate' : 'initial'}
               className="flex gap-3 flex-wrap"
@@ -85,7 +97,6 @@ export function Hero() {
               </Button>
             </motion.div>
 
-            {/* Contact details on mobile */}
             <motion.div
               {...fadeUp(0.4)} initial="initial" animate={isInView ? 'animate' : 'initial'}
               className="flex flex-wrap gap-x-6 gap-y-2 mt-12 lg:hidden"
@@ -96,40 +107,16 @@ export function Hero() {
           </div>
         </div>
 
-        {/* ── Right: Image Mosaic (desktop + mobile) ── */}
-        <div className="relative overflow-hidden lg:block">
-          {/* Gradient overlay left edge (desktop) */}
-          <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-l from-transparent via-brand-ink/10 to-brand-ink lg:to-brand-ink/60" />
-
-          <div className="h-full grid grid-cols-2 grid-rows-2 gap-[2px]">
-            {hero.images.map((img, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 + i * 0.15 }}
-                className="overflow-hidden relative min-h-[200px] lg:min-h-0"
-              >
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  sizes="(max-width:1024px) 50vw, 30vw"
-                  className="object-cover opacity-60 lg:opacity-50 grayscale-[15%]"
-                />
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Floating card */}
+        {/* ── Right: Floating card ── */}
+        <div className="hidden lg:flex flex-col justify-end pb-12 pl-12">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
-            className="absolute bottom-6 left-4 md:bottom-9 md:left-9 z-20 bg-brand-ink/90 backdrop-blur-xl border border-brand-sky/20 rounded-card p-4 md:p-5 max-w-[180px] md:max-w-[200px]"
+            className="bg-brand-ink/80 backdrop-blur-xl border border-white/10 rounded-card p-5 max-w-[200px]"
           >
             <p className="font-semi text-[10px] tracking-[2.5px] uppercase text-brand-sky mb-2">Enfoque</p>
-            <p className="font-display font-black text-[22px] md:text-[26px] leading-none">Calidad<br/>primero.</p>
+            <p className="font-display font-black text-[26px] leading-none">Calidad<br/>primero.</p>
             <p className="text-[12px] text-brand-slate mt-1">Sin atajos técnicos</p>
           </motion.div>
         </div>

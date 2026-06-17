@@ -16,8 +16,12 @@ export function useCounter({ target, duration = 1800, enabled = false }: Options
   const rafRef = useRef<number>(0)
 
   useEffect(() => {
-    if (!enabled || target === 0) {
-      setValue(target)
+    if (!enabled) {
+      setValue(0)
+      return
+    }
+    if (target === 0) {
+      setValue(0)
       return
     }
 
