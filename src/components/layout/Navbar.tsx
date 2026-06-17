@@ -57,7 +57,7 @@ export function Navbar() {
               src="/assets/logo.png"
               alt={site.name}
               width={160}
-              height={48}
+              height={63}
               className="h-[46px] w-auto object-contain brightness-0 invert"
               priority
             />

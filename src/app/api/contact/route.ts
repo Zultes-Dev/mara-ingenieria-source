@@ -101,18 +101,86 @@ export async function POST(req: NextRequest) {
     // ── 4. Send email ──────────────────────────────
     if (process.env.RESEND_API_KEY) {
       const resend = new Resend(process.env.RESEND_API_KEY)
+      const serviceLabel = data.service || 'No especificado'
+      const clientLabel  = data.clientType || 'No especificado'
+
       await resend.emails.send({
-        from:    'MARA Web <noreply@maraingenieria.com>',
+        from:    'MARA Ingeniería <noreply@maraingenieria.com>',
         to:      process.env.CONTACT_EMAIL!,
-        subject: `Nueva consulta — ${data.service || 'Servicio no especificado'}`,
+        subject: `Nueva solicitud — ${data.name} — ${serviceLabel}`,
         html: `
-          <h2>Nueva solicitud de contacto</h2>
-          <p><strong>Nombre:</strong> ${data.name}</p>
-          <p><strong>Email:</strong> ${data.email}</p>
-          <p><strong>Teléfono:</strong> ${data.phone}</p>
-          <p><strong>Tipo de cliente:</strong> ${data.clientType}</p>
-          <p><strong>Servicio:</strong> ${data.service}</p>
-          <p><strong>Mensaje:</strong><br>${data.message}</p>
+          <!DOCTYPE html>
+          <html>
+          <head><meta charset="utf-8"></head>
+          <body style="margin:0;padding:0;background:#f4f4f4;font-family:Helvetica,Arial,sans-serif;">
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td align="center" style="padding:40px 20px;">
+                  <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
+                    <!-- Header -->
+                    <tr>
+                      <td style="background:#0D1117;padding:32px 40px;text-align:center;">
+                        <h1 style="margin:0;color:#00AEEF;font-size:22px;font-weight:800;letter-spacing:-0.5px;text-transform:uppercase;">MARA INGENIERÍA</h1>
+                        <p style="margin:6px 0 0;color:#8A95A8;font-size:12px;">Nueva solicitud de contacto</p>
+                      </td>
+                    </tr>
+                    <!-- Status -->
+                    <tr>
+                      <td style="padding:0 40px;">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td style="padding:24px 0 0;border-bottom:2px solid #00AEEF;">
+                              <span style="display:inline-block;background:#00AEEF;color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:4px;text-transform:uppercase;letter-spacing:1px;">Nuevo lead</span>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <!-- Data -->
+                    <tr>
+                      <td style="padding:28px 40px 20px;">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                          ${[
+                            ['Nombre completo', data.name],
+                            ['Correo electrónico', data.email],
+                            ['Teléfono', data.phone],
+                            ['Tipo de cliente', clientLabel],
+                            ['Servicio requerido', serviceLabel],
+                          ].map(([label, value]) => `
+                            <tr>
+                              <td style="padding:8px 0;border-bottom:1px solid #eee;">
+                                <span style="font-size:11px;color:#8A95A8;text-transform:uppercase;letter-spacing:1px;font-weight:600;">${label}</span>
+                                <p style="margin:4px 0 0;font-size:15px;color:#1a1a1a;font-weight:500;">${value}</p>
+                              </td>
+                            </tr>
+                          `).join('')}
+                        </table>
+                      </td>
+                    </tr>
+                    <!-- Message -->
+                    <tr>
+                      <td style="padding:0 40px 28px;">
+                        <span style="font-size:11px;color:#8A95A8;text-transform:uppercase;letter-spacing:1px;font-weight:600;">Mensaje</span>
+                        <div style="margin:8px 0 0;padding:16px;background:#f8f9fb;border-radius:8px;font-size:14px;color:#333;line-height:1.6;border-left:3px solid #00AEEF;">
+                          ${data.message.replace(/\n/g, '<br/>')}
+                        </div>
+                      </td>
+                    </tr>
+                    <!-- Footer -->
+                    <tr>
+                      <td style="background:#f8f9fb;padding:20px 40px;text-align:center;border-top:1px solid #eee;">
+                        <p style="margin:0;font-size:12px;color:#8A95A8;">
+                          MARA Ingeniería — Barrancabermeja, Santander<br/>
+                          <a href="mailto:Maraingenieriasas@gmail.com" style="color:#00AEEF;text-decoration:none;">Maraingenieriasas@gmail.com</a>
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </body>
+          </html>
         `,
       })
     } else {

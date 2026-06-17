@@ -25,9 +25,29 @@ export function Hero() {
   return (
     <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-brand-ink">
 
+      {/* ── Background image layer (mobile + desktop) ── */}
+      <div className="absolute inset-0 z-0 lg:z-0">
+        <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-[2px]">
+          {hero.images.map((img, i) => (
+            <div key={i} className="overflow-hidden relative">
+              <Image
+                src={img.src}
+                alt=""
+                fill
+                sizes="50vw"
+                className="object-cover opacity-40 sm:opacity-50 lg:opacity-60 scale-105"
+                priority={i < 2}
+              />
+            </div>
+          ))}
+        </div>
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-ink/80 via-brand-ink/60 to-brand-ink/85 lg:bg-gradient-to-r lg:from-brand-ink lg:via-brand-ink/80 lg:to-brand-ink/40" />
+      </div>
+
       {/* Noise texture */}
       <div
-        className="absolute inset-0 z-0 pointer-events-none opacity-30"
+        className="absolute inset-0 z-[1] pointer-events-none opacity-30 mix-blend-overlay"
         style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E\")" }}
         aria-hidden="true"
       />
@@ -93,41 +113,13 @@ export function Hero() {
           </div>
         </div>
 
-        {/* ── Right: Image Mosaic (desktop only) ── */}
-        <div className="relative hidden lg:block overflow-hidden bg-gradient-to-br from-[#161c2c] to-[#0a0e17]">
-          {/* Dark left edge overlay to prevent image bleed into text */}
-          <div className="absolute inset-y-0 left-0 w-1/3 z-10 pointer-events-none bg-gradient-to-r from-brand-ink via-brand-ink/80 to-transparent" />
-
-          <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-[2px]">
-            {hero.images.map((img, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 + i * 0.15 }}
-                className="overflow-hidden relative"
-              >
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  sizes="50vw"
-                  className="object-cover opacity-60 grayscale-[20%] scale-110 transition-all duration-700"
-                  priority={i < 2}
-                />
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Top-to-bottom gradient for depth */}
-          <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-brand-ink/40 via-transparent to-brand-ink/10" />
-
-          {/* Floating card */}
+        {/* ── Right: Floating card (desktop only) ── */}
+        <div className="relative hidden lg:flex flex-col justify-end pb-12 pl-12">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
-            className="absolute bottom-9 left-9 z-20 bg-brand-ink/90 backdrop-blur-xl border border-brand-sky/20 rounded-card p-5 min-w-[200px]"
+            className="bg-brand-ink/90 backdrop-blur-xl border border-brand-sky/20 rounded-card p-5 min-w-[200px] self-start"
           >
             <p className="font-semi text-[10px] tracking-[2.5px] uppercase text-brand-sky mb-2">Enfoque</p>
             <p className="font-display font-black text-[26px] leading-none">Calidad<br/>primero.</p>
@@ -145,7 +137,7 @@ export function Hero() {
       >
         <div className="max-w-site mx-auto flex items-center justify-between">
           <div className="flex gap-8">
-            {services.slice(0, 3).map((svc) => (
+            {services.slice(0, 4).map((svc) => (
               <span key={svc.id} className="font-semi text-[11px] tracking-[1px] text-white/40 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-sky/40" />
                 {svc.title}

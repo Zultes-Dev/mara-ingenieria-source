@@ -27,7 +27,7 @@ export function Footer() {
                 src="/assets/logo.png"
                 alt={site.name}
                 width={160}
-                height={52}
+                height={63}
                 className="h-[52px] w-auto object-contain brightness-0 invert mb-5"
               />
               <p className="text-[14px] text-white/38 leading-[1.75] max-w-xs mb-6">
