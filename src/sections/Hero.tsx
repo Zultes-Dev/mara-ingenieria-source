@@ -25,37 +25,17 @@ export function Hero() {
   return (
     <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-brand-ink">
 
-      {/* ── Background image layer (mobile + desktop) ── */}
-      <div className="absolute inset-0 z-0 lg:z-0">
-        <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-[2px]">
-          {hero.images.map((img, i) => (
-            <div key={i} className="overflow-hidden relative">
-              <Image
-                src={img.src}
-                alt=""
-                fill
-                sizes="50vw"
-                className="object-cover opacity-40 sm:opacity-50 lg:opacity-60 scale-105"
-                priority={i < 2}
-              />
-            </div>
-          ))}
-        </div>
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-ink/80 via-brand-ink/60 to-brand-ink/85 lg:bg-gradient-to-r lg:from-brand-ink lg:via-brand-ink/80 lg:to-brand-ink/40" />
-      </div>
-
       {/* Noise texture */}
       <div
-        className="absolute inset-0 z-[1] pointer-events-none opacity-30 mix-blend-overlay"
+        className="absolute inset-0 z-0 pointer-events-none opacity-30"
         style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E\")" }}
         aria-hidden="true"
       />
 
-      <div ref={ref} className="relative z-10 flex-1 grid grid-cols-1 lg:grid-cols-2">
+      <div ref={ref} className="relative z-10 flex-1 flex flex-col lg:grid lg:grid-cols-2">
 
         {/* ── Left content ── */}
-        <div className="relative z-20 flex flex-col justify-center px-[5%] py-24 sm:py-32 lg:py-0">
+        <div className="flex flex-col justify-center px-[5%] py-24 sm:py-32 lg:py-0">
           <div className="max-w-[560px] lg:ml-auto lg:pr-[60px]">
 
             {/* Status */}
@@ -102,7 +82,7 @@ export function Hero() {
               </Button>
             </motion.div>
 
-            {/* Contact details — visible on mobile */}
+            {/* Contact details on mobile */}
             <motion.div
               {...fadeUp(0.4)} initial="initial" animate={isInView ? 'animate' : 'initial'}
               className="flex flex-wrap gap-x-6 gap-y-2 mt-12 lg:hidden"
@@ -113,16 +93,40 @@ export function Hero() {
           </div>
         </div>
 
-        {/* ── Right: Floating card (desktop only) ── */}
-        <div className="relative hidden lg:flex flex-col justify-end pb-12 pl-12">
+        {/* ── Right: Image Mosaic (desktop + mobile) ── */}
+        <div className="relative overflow-hidden lg:block">
+          {/* Gradient overlay left edge (desktop) */}
+          <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-l from-transparent via-brand-ink/10 to-brand-ink lg:to-brand-ink/60" />
+
+          <div className="h-full grid grid-cols-2 grid-rows-2 gap-[2px]">
+            {hero.images.map((img, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 + i * 0.15 }}
+                className="overflow-hidden relative min-h-[200px] lg:min-h-0"
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  sizes="(max-width:1024px) 50vw, 30vw"
+                  className="object-cover opacity-60 lg:opacity-50 grayscale-[15%]"
+                />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Floating card */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
-            className="bg-brand-ink/90 backdrop-blur-xl border border-brand-sky/20 rounded-card p-5 min-w-[200px] self-start"
+            className="absolute bottom-6 left-4 md:bottom-9 md:left-9 z-20 bg-brand-ink/90 backdrop-blur-xl border border-brand-sky/20 rounded-card p-4 md:p-5 max-w-[180px] md:max-w-[200px]"
           >
             <p className="font-semi text-[10px] tracking-[2.5px] uppercase text-brand-sky mb-2">Enfoque</p>
-            <p className="font-display font-black text-[26px] leading-none">Calidad<br/>primero.</p>
+            <p className="font-display font-black text-[22px] md:text-[26px] leading-none">Calidad<br/>primero.</p>
             <p className="text-[12px] text-brand-slate mt-1">Sin atajos técnicos</p>
           </motion.div>
         </div>
@@ -133,7 +137,7 @@ export function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, delay: 1 }}
-        className="relative z-20 border-t border-white/6 px-[5%] py-3 hidden sm:block"
+        className="relative z-10 border-t border-white/6 px-[5%] py-3 hidden sm:block"
       >
         <div className="max-w-site mx-auto flex items-center justify-between">
           <div className="flex gap-8">
