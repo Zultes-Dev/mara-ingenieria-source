@@ -14,7 +14,6 @@ export function About() {
             <SectionHeader
               eyebrow={about.eyebrow}
               headline={about.headline as unknown as string[]}
-              lastStroke
             />
             <div className="flex flex-col gap-4 mb-8">
               {about.body.map((para, i) => (

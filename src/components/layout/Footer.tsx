@@ -1,5 +1,8 @@
 // components/layout/Footer.tsx
+'use client'
+
 import Image from 'next/image'
+import { Reveal } from '@components/ui/Reveal'
 import { site } from '@config/site'
 import { services } from '@config/content'
 
@@ -16,79 +19,80 @@ export function Footer() {
     <footer className="bg-[#080b10] border-t border-white/5">
       <div className="site-container py-16 pb-8">
 
-        {/* Top grid */}
         <div className="grid grid-cols-1 md:grid-cols-[2.2fr_1fr_1fr] gap-14 pb-12 border-b border-white/5">
 
-          {/* Brand */}
-          <div>
-            <Image
-              src="/assets/logo.png"
-              alt={site.name}
-              width={160}
-              height={52}
-              className="h-[52px] w-auto object-contain brightness-0 invert mb-5"
-            />
-            <p className="text-[14px] text-white/38 leading-[1.75] max-w-xs mb-6">
-              Empresa joven de ingeniería civil con base en Barrancabermeja, Santander. Comprometidos con la calidad técnica y la transparencia desde el primer proyecto.
-            </p>
-            <div className="flex gap-2.5">
-              {socials.map(({ label, href, icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-[38px] h-[38px] rounded-[8px] border border-white/10 flex items-center justify-center text-white/45 hover:border-brand-sky hover:text-brand-sky transition-colors duration-200"
-                >
-                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-[14px] h-[14px]">
-                    <path d={icon} />
-                  </svg>
-                </a>
-              ))}
+          <Reveal>
+            <div>
+              <Image
+                src="/assets/logo.png"
+                alt={site.name}
+                width={160}
+                height={52}
+                className="h-[52px] w-auto object-contain brightness-0 invert mb-5"
+              />
+              <p className="text-[14px] text-white/38 leading-[1.75] max-w-xs mb-6">
+                Empresa de ingeniería civil con base en Barrancabermeja, Santander. Comprometidos con la calidad técnica y la transparencia desde el primer proyecto.
+              </p>
+              <div className="flex gap-2.5">
+                {socials.map(({ label, href, icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-[38px] h-[38px] rounded-[8px] border border-white/10 flex items-center justify-center text-white/45 hover:border-brand-sky hover:text-brand-sky transition-colors duration-200"
+                  >
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-[14px] h-[14px]">
+                      <path d={icon} />
+                    </svg>
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
+          </Reveal>
 
-          {/* Servicios */}
-          <div>
-            <h5 className="font-semi text-[10px] tracking-[2.5px] uppercase text-brand-sky/65 mb-5 font-semibold">
-              Servicios
-            </h5>
-            <ul className="flex flex-col gap-2.5 list-none p-0 m-0">
-              {services.map(svc => (
-                <li key={svc.id} className="text-[13px] text-white/38">
-                  {svc.title}
+          <Reveal delay={1}>
+            <div>
+              <h5 className="font-semi text-[10px] tracking-[2.5px] uppercase text-brand-sky/65 mb-5 font-semibold">
+                Servicios
+              </h5>
+              <ul className="flex flex-col gap-2.5 list-none p-0 m-0">
+                {services.map(svc => (
+                  <li key={svc.id} className="text-[13px] text-white/38">
+                    {svc.title}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+
+          <Reveal delay={2}>
+            <div>
+              <h5 className="font-semi text-[10px] tracking-[2.5px] uppercase text-brand-sky/65 mb-5 font-semibold">
+                Contacto
+              </h5>
+              <ul className="flex flex-col gap-2.5 list-none p-0 m-0 text-[13px] text-white/38">
+                <li>{site.contact.address}</li>
+                <li>
+                  <a href={`mailto:${site.contact.email}`} className="hover:text-white transition-colors">
+                    {site.contact.email}
+                  </a>
                 </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contacto */}
-          <div>
-            <h5 className="font-semi text-[10px] tracking-[2.5px] uppercase text-brand-sky/65 mb-5 font-semibold">
-              Contacto
-            </h5>
-            <ul className="flex flex-col gap-2.5 list-none p-0 m-0 text-[13px] text-white/38">
-              <li>{site.contact.address}</li>
-              <li>
-                <a href={`mailto:${site.contact.email}`} className="hover:text-white transition-colors">
-                  {site.contact.email}
-                </a>
-              </li>
-              <li>
-                <a href={`tel:${site.contact.phone}`} className="hover:text-white transition-colors">
-                  {site.contact.phone}
-                </a>
-              </li>
-              <li>{site.contact.hours}</li>
-            </ul>
-          </div>
+                <li>
+                  <a href={`tel:${site.contact.phone}`} className="hover:text-white transition-colors">
+                    {site.contact.phone}
+                  </a>
+                </li>
+                <li>{site.contact.hours}</li>
+              </ul>
+            </div>
+          </Reveal>
         </div>
 
-        {/* Bottom bar */}
         <div className="flex flex-wrap justify-between items-center gap-3 pt-7">
           <p className="text-[12px] text-white/20">
-            © {year} {site.name} — Todos los derechos reservados
+            &copy; {year} {site.name} &mdash; Todos los derechos reservados
           </p>
           <div className="flex gap-2">
             {site.norms.map(norm => (

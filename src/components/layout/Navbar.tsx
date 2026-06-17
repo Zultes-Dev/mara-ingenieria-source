@@ -39,6 +39,7 @@ export function Navbar() {
         role="banner"
         className={cn(
           'fixed top-0 left-0 right-0 z-[999] px-[5%]',
+          'bg-brand-ink/60 backdrop-blur-sm',
           'transition-[background,border,box-shadow] duration-350',
           scrolled && 'bg-brand-ink/96 backdrop-blur-xl border-b border-white/6 shadow-[0_2px_40px_rgba(0,0,0,0.4)]'
         )}

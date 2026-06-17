@@ -134,9 +134,9 @@ export const trustStats: TrustStat[] = [
 
 export const about = {
   eyebrow:  'Quiénes somos',
-  headline: ['Una empresa', 'nueva.', 'Seria.'],
+  headline: ['Una empresa', 'seria.'],
   body: [
-    'MARA Ingeniería es una firma joven de ingeniería civil con base en **Barrancabermeja, Santander**. Nacimos con una convicción clara: que el tamaño de una empresa no determina la calidad de su trabajo.',
+    'MARA Ingeniería es una firma de ingeniería civil con base en **Barrancabermeja, Santander**. Nacimos con una convicción clara: que el tamaño de una empresa no determina la calidad de su trabajo.',
     'Operamos con **formación técnica sólida**, normas vigentes y una honestidad que pocas empresas se atreven a prometer: si un proyecto está fuera de nuestro alcance, lo decimos antes de comenzar.',
     'Atendemos personas naturales, empresas y entidades públicas con el mismo nivel de rigor y dedicación.',
   ],

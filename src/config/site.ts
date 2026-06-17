@@ -13,10 +13,9 @@ export const site = {
 
   // ── Contacto ─────────────────────────────────────────
   contact: {
-    // Reemplazar con datos reales antes de desplegar
-    phone:       process.env['NEXT_PUBLIC_PHONE']    ?? '+57 XXX XXX XXXX',
-    whatsapp:    process.env['NEXT_PUBLIC_WA_NUMBER'] ?? '573000000000',
-    email:       process.env['NEXT_PUBLIC_EMAIL']    ?? 'contacto@maraingenieria.com',
+    phone:       process.env['NEXT_PUBLIC_PHONE']    ?? '+57 320 304 7122',
+    whatsapp:    process.env['NEXT_PUBLIC_WA_NUMBER'] ?? '573203047122',
+    email:       process.env['NEXT_PUBLIC_EMAIL']    ?? 'Maraingenieriasas@gmail.com',
     address:     'Barrancabermeja, Santander, Colombia',
     coordinates: { lat: 7.0644, lng: -73.8547 } as const,
     hours:       'Lunes – Sábado, 7:00 am – 6:00 pm',
@@ -33,7 +32,7 @@ export const site = {
     instagram: 'https://instagram.com/maraingenieria',
     facebook:  'https://facebook.com/maraingenieria',
     linkedin:  'https://linkedin.com/company/maraingenieria',
-    whatsapp:  `https://wa.me/${process.env['NEXT_PUBLIC_WA_NUMBER'] ?? '573000000000'}`,
+    whatsapp:  `https://wa.me/${process.env['NEXT_PUBLIC_WA_NUMBER'] ?? '573203047122'}`,
   },
 
   // ── Normas técnicas — usadas en múltiples secciones ──
