@@ -32,15 +32,10 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      {/* Background gradient — visible on all screen sizes */}
-      <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-br from-brand-navy/40 via-brand-ink to-brand-ink/95 lg:bg-none" />
-      <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-r from-brand-ink via-brand-ink/60 to-transparent lg:via-transparent" />
-
-      {/* Split layout */}
       <div ref={ref} className="relative z-10 flex-1 grid grid-cols-1 lg:grid-cols-2">
 
         {/* ── Left content ── */}
-        <div className="flex flex-col justify-center px-[5%] py-24 sm:py-32 lg:py-0">
+        <div className="relative z-20 flex flex-col justify-center px-[5%] py-24 sm:py-32 lg:py-0">
           <div className="max-w-[560px] lg:ml-auto lg:pr-[60px]">
 
             {/* Status */}
@@ -54,7 +49,7 @@ export function Hero() {
               </span>
             </motion.div>
 
-            {/* Headline — dynamic: renders all lines from array */}
+            {/* Headline */}
             <motion.h1
               {...fadeUp(0.1)} initial="initial" animate={isInView ? 'animate' : 'initial'}
               className="font-display font-black text-display-xl uppercase leading-[0.9] tracking-[-3px] mb-6"
@@ -79,16 +74,10 @@ export function Hero() {
               {...fadeUp(0.3)} initial="initial" animate={isInView ? 'animate' : 'initial'}
               className="flex gap-3 flex-wrap"
             >
-              <Button
-                onClick={() => { scrollTo('contact'); track.ctaClick('hero_primary') }}
-                icon={<ArrowIcon />}
-              >
+              <Button onClick={() => { scrollTo('contact'); track.ctaClick('hero_primary') }} icon={<ArrowIcon />}>
                 {hero.cta.primary}
               </Button>
-              <Button
-                variant="ghost"
-                onClick={() => { scrollTo('services'); track.ctaClick('hero_secondary') }}
-              >
+              <Button variant="ghost" onClick={() => { scrollTo('services'); track.ctaClick('hero_secondary') }}>
                 {hero.cta.secondary}
               </Button>
             </motion.div>
@@ -98,18 +87,17 @@ export function Hero() {
               {...fadeUp(0.4)} initial="initial" animate={isInView ? 'animate' : 'initial'}
               className="flex flex-wrap gap-x-6 gap-y-2 mt-12 lg:hidden"
             >
-              <span className="font-semi text-[11px] tracking-[1.5px] text-brand-slate">
-                📍 {hero.topBar.location}
-              </span>
-              <span className="font-semi text-[11px] tracking-[1.5px] text-brand-slate">
-                📞 {site.contact.phone}
-              </span>
+              <span className="font-semi text-[11px] tracking-[1.5px] text-brand-slate">📍 {hero.topBar.location}</span>
+              <span className="font-semi text-[11px] tracking-[1.5px] text-brand-slate">📞 {site.contact.phone}</span>
             </motion.div>
           </div>
         </div>
 
-        {/* ── Right: Image Mosaic ── */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-[#161c2c] to-[#0a0e17] lg:block">
+        {/* ── Right: Image Mosaic (desktop only) ── */}
+        <div className="relative hidden lg:block overflow-hidden bg-gradient-to-br from-[#161c2c] to-[#0a0e17]">
+          {/* Dark left edge overlay to prevent image bleed into text */}
+          <div className="absolute inset-y-0 left-0 w-1/3 z-10 pointer-events-none bg-gradient-to-r from-brand-ink via-brand-ink/80 to-transparent" />
+
           <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-[2px]">
             {hero.images.map((img, i) => (
               <motion.div
@@ -123,14 +111,16 @@ export function Hero() {
                   src={img.src}
                   alt={img.alt}
                   fill
-                  sizes="(max-width:1024px) 0px, 30vw"
-                  className="object-cover opacity-50 grayscale-[20%] scale-110 group-hover:scale-100 transition-all duration-700"
+                  sizes="50vw"
+                  className="object-cover opacity-60 grayscale-[20%] scale-110 transition-all duration-700"
+                  priority={i < 2}
                 />
               </motion.div>
             ))}
           </div>
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-l from-transparent via-brand-ink/10 to-brand-ink lg:to-brand-ink/60" />
+
+          {/* Top-to-bottom gradient for depth */}
+          <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-brand-ink/40 via-transparent to-brand-ink/10" />
 
           {/* Floating card */}
           <motion.div
@@ -151,7 +141,7 @@ export function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, delay: 1 }}
-        className="relative z-10 border-t border-white/6 px-[5%] py-3 hidden sm:block"
+        className="relative z-20 border-t border-white/6 px-[5%] py-3 hidden sm:block"
       >
         <div className="max-w-site mx-auto flex items-center justify-between">
           <div className="flex gap-8">
@@ -173,7 +163,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 hidden lg:flex"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-1.5 hidden lg:flex"
       >
         <span className="font-semi text-[9px] tracking-[3px] uppercase text-brand-slate/60">Scroll</span>
         <span className="w-[1px] h-8 bg-gradient-to-b from-brand-sky to-transparent animate-scroll-bar" />
