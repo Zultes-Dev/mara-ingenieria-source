@@ -31,11 +31,11 @@ export function Services() {
 
       {/* Full-width editorial grid */}
       <div className="border-t border-white/6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-x-0 sm:divide-x lg:divide-x divide-y divide-white/6">
           {services.map((svc, i) => (
             <Reveal key={svc.id} delay={(i % 4) as 0 | 1 | 2 | 3}>
               <div
-                className="group p-8 xl:p-11 border-b border-white/6 border-r border-white/6 hover:bg-brand-navy/35 transition-all duration-350 relative overflow-hidden cursor-default flex flex-col"
+                className="group p-8 xl:p-11 hover:bg-brand-navy/35 transition-all duration-350 relative overflow-hidden cursor-default flex flex-col"
                 onMouseEnter={() => track.serviceHover(svc.id)}
               >
                 {/* Top hover gradient */}

@@ -4,14 +4,19 @@
 import { useEffect, useRef, useCallback } from 'react'
 
 export function CustomCursor() {
-  const cursorRef = useRef<HTMLDivElement>(null)
+  const ringRef = useRef<HTMLDivElement>(null)
+  const dotRef = useRef<HTMLDivElement>(null)
   const posRef = useRef({ x: 0, y: 0 })
   const rafRef = useRef<number>(0)
 
   const update = useCallback(() => {
-    const el = cursorRef.current
-    if (!el) return
-    el.style.transform = `translate(${posRef.current.x - 12}px, ${posRef.current.y - 12}px)`
+    const ring = ringRef.current
+    const dot = dotRef.current
+    if (!ring || !dot) return
+    const x = posRef.current.x
+    const y = posRef.current.y
+    ring.style.transform = `translate(${x - 18}px, ${y - 18}px)`
+    dot.style.transform = `translate(${x - 3}px, ${y - 3}px)`
     rafRef.current = 0
   }, [])
 
@@ -21,8 +26,12 @@ export function CustomCursor() {
       if (!rafRef.current) rafRef.current = requestAnimationFrame(update)
     }
 
-    const onOver = () => cursorRef.current?.classList.add('scale-150', 'opacity-60', 'mix-blend-difference')
-    const onOut  = () => cursorRef.current?.classList.remove('scale-150', 'opacity-60', 'mix-blend-difference')
+    const onOver = () => {
+      ringRef.current?.classList.add('!w-14', '!h-14', '!opacity-20', '!border-brand-sky')
+    }
+    const onOut = () => {
+      ringRef.current?.classList.remove('!w-14', '!h-14', '!opacity-20', '!border-brand-sky')
+    }
 
     document.addEventListener('mousemove', onMove)
     document.querySelectorAll('a, button, input, textarea, select, [role="button"]').forEach(el => {
@@ -37,10 +46,17 @@ export function CustomCursor() {
   }, [update])
 
   return (
-    <div
-      ref={cursorRef}
-      className="fixed top-0 left-0 z-[9999] pointer-events-none w-6 h-6 rounded-full border-2 border-brand-sky/70 transition-[width,height] duration-200 ease-out hidden lg:block"
-      style={{ willChange: 'transform' }}
-    />
+    <>
+      <div
+        ref={ringRef}
+        className="fixed top-0 left-0 z-[9999] pointer-events-none w-9 h-9 rounded-full border-[2.5px] border-brand-sky/80 transition-all duration-200 ease-out hidden lg:block"
+        style={{ willChange: 'transform' }}
+      />
+      <div
+        ref={dotRef}
+        className="fixed top-0 left-0 z-[9999] pointer-events-none w-[5px] h-[5px] rounded-full bg-brand-sky hidden lg:block"
+        style={{ willChange: 'transform' }}
+      />
+    </>
   )
 }
