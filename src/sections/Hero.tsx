@@ -125,7 +125,7 @@ export function Hero() {
             className="absolute bottom-5 left-1/2 -translate-x-1/2 sm:left-6 sm:translate-x-0 md:bottom-9 md:left-9 z-20 bg-brand-ink/85 backdrop-blur-xl border border-white/10 rounded-card p-3 sm:p-4 md:p-5 w-[90%] sm:w-auto max-w-[200px] text-center sm:text-left"
           >
             <p className="font-semi text-[10px] tracking-[2.5px] uppercase text-brand-sky mb-1.5">Enfoque</p>
-            <p className="font-display font-black text-[20px] sm:text-[22px] md:text-[26px] leading-none">Calidad<br className="hidden sm:block"/>primero.</p>
+            <p className="font-display font-black text-[20px] sm:text-[22px] md:text-[26px] leading-none">Calidad<br/>primero.</p>
             <p className="text-[11px] sm:text-[12px] text-brand-slate mt-1">Sin atajos técnicos</p>
           </motion.div>
         </div>

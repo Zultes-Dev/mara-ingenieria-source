@@ -76,7 +76,7 @@ export const hero = {
     secondary: 'Ver servicios',
   },
   topBar: {
-    location: 'Barrancabermeja, Santander',
+    location: 'Barrancabermeja / Bogotá',
     norm:     'NSR-10 · RAS-2000',
   },
   // Imágenes del mosaico — reemplazar con fotos propias cuando estén disponibles
@@ -136,7 +136,7 @@ export const about = {
   eyebrow:  'Quiénes somos',
   headline: ['Una empresa', 'seria.'],
   body: [
-    'MARA Ingeniería es una firma de ingeniería civil con base en **Barrancabermeja, Santander**. Nacimos con una convicción clara: que el tamaño de una empresa no determina la calidad de su trabajo.',
+    'MARA Ingeniería es una firma de ingeniería civil con base en **Barrancabermeja, Santander** y presencia en **Bogotá**. Nacimos con una convicción clara: que el tamaño de una empresa no determina la calidad de su trabajo.',
     'Operamos con **formación técnica sólida**, normas vigentes y una honestidad que pocas empresas se atreven a prometer: si un proyecto está fuera de nuestro alcance, lo decimos antes de comenzar.',
     'Atendemos personas naturales, empresas y entidades públicas con el mismo nivel de rigor y dedicación.',
   ],
@@ -295,7 +295,7 @@ export const manifesto = {
   quote:  ['Una empresa nueva no tiene proyectos pasados que mostrar. Tiene', 'valores presentes', 'que demostrar.'],
   body:   'Construimos reputación proyecto a proyecto. Cada obra bien hecha es nuestra mejor presentación ante el siguiente cliente.',
   author: 'Equipo MARA Ingeniería',
-  location: 'Barrancabermeja · Santander · Colombia',
+  location: 'Barrancabermeja / Bogotá · Colombia',
   attrs: [
     { value: '100%', label: 'Transparencia'   },
     { value: '0',    label: 'Atajos de calidad' },
@@ -308,10 +308,11 @@ export const manifesto = {
 
 export const coverage = {
   eyebrow:  'Cobertura',
-  headline: ['Base en', 'Santander.', 'Nacional.'],
-  body:     'Con sede en Barrancabermeja, atendemos proyectos en toda Colombia. Para consultoría e interventoría también operamos de forma remota.',
+  headline: ['Base en', 'Santander', 'y Bogotá.'],
+  body:     'Con sedes en Barrancabermeja y Bogotá, atendemos proyectos en toda Colombia. Para consultoría e interventoría también operamos de forma remota.',
   items: [
     { color: '#00AEEF', label: 'Sede principal — Barrancabermeja, Santander'         },
+    { color: '#6366f1', label: 'Oficina — Bogotá D.C.'                                },
     { color: '#22c55e', label: 'Proyectos en campo — todo el territorio nacional'     },
     { color: '#f59e0b', label: 'Consultoría remota — cualquier región del país'       },
   ],
