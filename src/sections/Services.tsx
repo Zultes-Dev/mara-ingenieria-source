@@ -6,6 +6,10 @@ import { SectionHeader } from '@components/ui/SectionHeader'
 import { services }      from '@config/content'
 import { track }         from '@utils/analytics'
 
+function scrollTo(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+}
+
 export function Services() {
   return (
     <section id="services" className="py-[120px] pb-0 bg-[#0a0e17]">
@@ -26,12 +30,12 @@ export function Services() {
       </div>
 
       {/* Full-width editorial grid */}
-      <div className="border-t border-white/6 border-l border-white/6">
+      <div className="border-t border-white/6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
           {services.map((svc, i) => (
             <Reveal key={svc.id} delay={(i % 4) as 0 | 1 | 2 | 3}>
               <div
-                className="group p-11 border-r border-white/6 border-b border-white/6 hover:bg-brand-navy/35 transition-all duration-350 relative overflow-hidden cursor-default"
+                className="group p-8 xl:p-11 border-b border-white/6 border-r border-white/6 hover:bg-brand-navy/35 transition-all duration-350 relative overflow-hidden cursor-default flex flex-col"
                 onMouseEnter={() => track.serviceHover(svc.id)}
               >
                 {/* Top hover gradient */}
@@ -44,10 +48,13 @@ export function Services() {
                   <i className={`fa-solid ${svc.icon}`} aria-hidden="true" />
                 </div>
                 <h3 className="font-semi text-[16px] font-bold mb-3 leading-[1.25]">{svc.title}</h3>
-                <p className="text-[13px] text-brand-slate leading-[1.6]">{svc.description}</p>
-                <span className="inline-flex items-center gap-1.5 mt-5 font-semi text-[11px] tracking-[1.5px] uppercase text-brand-sky opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                <p className="text-[13px] text-brand-slate leading-[1.6] flex-1">{svc.description}</p>
+                <button
+                  onClick={() => { scrollTo('contact'); track.ctaClick(`service_${svc.id}`) }}
+                  className="inline-flex items-center gap-1.5 mt-5 font-semi text-[11px] tracking-[1.5px] uppercase text-brand-sky opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 hover:text-white focus-visible:outline-brand-sky"
+                >
                   → Ver más
-                </span>
+                </button>
               </div>
             </Reveal>
           ))}

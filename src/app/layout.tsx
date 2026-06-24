@@ -2,6 +2,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Barlow, Barlow_Condensed, Barlow_Semi_Condensed } from 'next/font/google'
 import Script from 'next/script'
+import { CustomCursor } from '@components/ui/CustomCursor'
 import './globals.css'
 import { site } from '@config/site'
 
@@ -170,7 +171,8 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/assets/logo.png" />
       </head>
 
-      <body>
+      <body className="lg:cursor-none">
+        <CustomCursor />
         {children}
 
         {/* Google Analytics 4 — solo en producción si GA_ID está definido */}
