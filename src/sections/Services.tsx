@@ -29,16 +29,15 @@ export function Services() {
         </div>
       </div>
 
-      {/* Full-width editorial grid */}
-      <div className="border-t border-white/6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-x-0 sm:divide-x lg:divide-x divide-y divide-white/6">
+      {/* Premium grid — gap-px creates perfect 1px lines */}
+      <div className="site-container">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-white/6 rounded-card overflow-hidden">
           {services.map((svc, i) => (
             <Reveal key={svc.id} delay={(i % 4) as 0 | 1 | 2 | 3}>
               <div
-                className="group p-8 xl:p-11 hover:bg-brand-navy/35 transition-all duration-350 relative overflow-hidden cursor-default flex flex-col"
+                className="group bg-[#0a0e17] p-8 xl:p-11 hover:bg-brand-navy/25 transition-all duration-350 relative overflow-hidden cursor-default flex flex-col h-full"
                 onMouseEnter={() => track.serviceHover(svc.id)}
               >
-                {/* Top hover gradient */}
                 <span className="absolute inset-0 bg-gradient-to-b from-brand-sky/6 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-350 pointer-events-none" />
 
                 <span className="block font-display font-bold text-[11px] tracking-[3px] text-brand-sky/35 mb-8">
@@ -51,7 +50,7 @@ export function Services() {
                 <p className="text-[13px] text-brand-slate leading-[1.6] flex-1">{svc.description}</p>
                 <button
                   onClick={() => { scrollTo('contact'); track.ctaClick(`service_${svc.id}`) }}
-                  className="inline-flex items-center gap-1.5 mt-5 font-semi text-[11px] tracking-[1.5px] uppercase text-brand-sky opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 hover:text-white focus-visible:outline-brand-sky"
+                  className="inline-flex items-center gap-1.5 mt-5 font-semi text-[11px] tracking-[1.5px] uppercase text-brand-sky opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 hover:text-white focus-visible:outline-brand-sky self-start"
                 >
                   → Ver más
                 </button>
